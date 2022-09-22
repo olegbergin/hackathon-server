@@ -15,8 +15,6 @@ router.post('/login', controller.login)
 
 router.get('/users', authMiddleware, controller.getUsers)
 
-router.put('/makeadmin/:username', roleMiddleware(['SUPERADMIN']), controller.makeAdmin)
+router.put('/makeadmin/:username', authMiddleware, controller.makeAdmin)
 
 module.exports = router
-
-// roleMiddleware(['ADMIN','USER','SUPERADMIN'])

@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const authRouter = require('./authRouter')
+const eventRouter = require('./eventRouter')
 const { DB } = require("./config")
 const cors = require('cors');
 
@@ -14,6 +15,8 @@ app.use(cors());
 app.use(express.json())
 
 app.use("/auth", authRouter)
+
+app.use("/add", eventRouter)
 
 const start = async () => {
     try {
