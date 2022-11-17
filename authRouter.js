@@ -15,7 +15,7 @@ router.post('/registration',
 
 router.post('/login', controller.login)
 
-router.get('/users', authMiddleware, controller.getUsers)
+router.get('/users',  controller.getUsers)
 
 router.put('/makeadmin/:username', authMiddleware, controller.makeAdmin)
 
