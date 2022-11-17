@@ -2,7 +2,7 @@ const User = require('./models/User')
 const Role = require('./models/Role')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { validationResult } = require('express-validator')
+// const { validationResult } = require('express-validator')
 const { secret } = require("./config")
 
 const generateAccessToken = (id, role) => {
@@ -17,11 +17,11 @@ class authController {
 
     async registration(req, res) {
         try {
-            const errors = validationResult(req)
+            // const errors = validationResult(req)
 
-            if (!errors.isEmpty()) {
-                return res.status(400).json({ message: "Registration error", errors })
-            }
+            // if (!errors.isEmpty()) {
+            //     return res.status(400).json({ message: "Registration error", errors })
+            // }
 
             const { username, password } = req.body
             const candidate = await User.findOne({ username })
@@ -31,10 +31,10 @@ class authController {
             }
 
             const hashPassword = bcrypt.hashSync(password, 7)
-            const userRole = await Role.findOne({ value: "USER" })
-            const user = new User({ username, password: hashPassword, role: userRole.value })
+            // const userRole = await Role.findOne({ value: "USER" })
+            const user = new User({ username, password: hashPassword, role:"ADMIN" })
             await user.save()
-            
+
             return res.json({ message: "User registered successfully" })
 
         } catch (e) {
@@ -73,9 +73,9 @@ class authController {
             console.log(e);
         }
     }
-    async makeAdmin(req, res){
+    async makeAdmin(req, res) {
         try {
-            
+
         } catch (e) {
             console.log(e);
         }
